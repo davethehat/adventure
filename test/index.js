@@ -1,0 +1,2 @@
+require('./heroTests');
+require('./locationTests');
