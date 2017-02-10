@@ -1,5 +1,6 @@
 'use strict';
 
+
 const VOWELS = 'aeiou';
 
 module.exports = {

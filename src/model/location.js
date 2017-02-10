@@ -1,6 +1,7 @@
 'use strict';
 
-const textUtil = require('../util/textUtil')
+
+const textUtil = require('../util/textUtil');
 
 class Location {
   constructor(name, description) {
@@ -50,7 +51,7 @@ class Location {
   }
 
   go(direction) {
-    var exit = this.exits[direction];
+    let exit = this.exits[direction];
     return exit ? exit.location : null;
   }
 }

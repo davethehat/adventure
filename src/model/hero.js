@@ -1,5 +1,6 @@
 'use strict';
 
+
 class Hero {
   constructor(name, initialLocation) {
     this.name = name;

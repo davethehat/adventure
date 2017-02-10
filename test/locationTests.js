@@ -1,5 +1,6 @@
 'use strict';
 
+
 const assert = require('assert');
 
 const Location = require('../src/model/location.js');

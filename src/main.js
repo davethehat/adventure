@@ -1,5 +1,6 @@
 'use strict';
 
+
 const readline = require('readline');
 
 const textUtil = require('./util/textUtil');
@@ -11,17 +12,20 @@ const Item = require('./model/item');
 const DIRECTIONS = [ 'north', 'south', 'east', 'west'];
 
 const VERBMAPPING = {
-  q   : 'quit',
-  g   : 'go',
-  bye : 'quit',
-  n   : 'north',
-  s   : 'south',
-  e   : 'east',
-  w   : 'west',
-  l   : 'look',
-  inv : 'inventory',
-  i   : 'inventory'
+  g    : 'go',
+  q    : 'quit',
+  bye  : 'quit',
+  exit : 'quit',
+  n    : 'north',
+  s    : 'south',
+  e    : 'east',
+  w    : 'west',
+  l    : 'look',
+  inv  : 'inventory',
+  i    : 'inventory'
 };
+
+let verbose = false;
 
 main();
 
@@ -76,7 +80,14 @@ function runGame(hero) {
 // ===============================
 function commandLoop(hero, inputReader) {
   console.log('...');
-  describeLocation(hero.getLocation());
+
+  let location = hero.getLocation();
+  if (verbose) {
+    describeLocationVerbose(location);
+    verbose = false;
+  } else {
+    describeLocation(location);
+  }
 
   inputReader.question('What now? ', resp => {
     processResponse(hero, resp);
@@ -159,8 +170,7 @@ function processVerbCommand(hero, verb) {
   }
 
   if (verb === 'look') {
-    let locationName = textUtil.capitalise(hero.getLocation().getName());
-    console.log(locationName + ': ' + hero.getLocation().getDescription());
+    verbose = true;
     return;
   }
 
@@ -190,7 +200,23 @@ function describeLocation(location) {
   });
   
   location.withExits((direction, exit) => {
-    console.log('You see a ' + exit.kind + ' to the ' + direction + '.');
+    console.log('You see ' + textUtil.withArticle(exit.kind) + ' to the ' + direction + '.');
+  });
+}
+
+
+// ===============================
+function describeLocationVerbose(location) {
+  console.log('You are in a ' + location.getName() + '.');
+  console.log(location.getDescription());
+
+  location.withItems((name, item) => {
+    console.log('There is ' + textUtil.withArticle(name) + ' here.');
+    console.log(item.getDescription());
+  });
+
+  location.withExits((direction, exit) => {
+    console.log('You see ' + textUtil.withArticle(exit.kind) + ' to the ' + direction + '.');
   });
 }
 

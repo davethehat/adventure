@@ -1,5 +1,6 @@
 'use strict';
 
+
 const assert = require('assert');
 
 const Hero = require('../src/model/hero.js');
@@ -46,17 +47,49 @@ function shouldLoseAnItemWhenDropped() {
 
 }
 
-
 function shouldTakeAllAtALocation() {
-  // your code here...  
+    let location = new Location('test','a test location');
+    let hero = new Hero('adventurer', location);
+
+    let item1 = new Item('test1', 'a test item');
+    let item2 = new Item('test1', 'a test item');
+
+    location.place(item1);
+    location.place(item2);
+
+
+    // === TASK 3 ===
+    // You will need to write this method in hero.js
+    hero.takeAll();
+
+    assert.equal(hero.numberOfItemsCarried(), 2, 'hero has taken two items');
+    assert(hero.holds(item1), 'hero has first item');
+    assert(hero.holds(item2), 'hero has second item');
+    assert(!location.contains(item1), 'first item is missing from the location');
+    assert(!location.contains(item2), 'second item is missing from the location');
+
 }
+
+function shouldDropAllAtALocation() {
+  // === TASK 4 ===
+  // your code here
+}
+
 
 
 function main() {
   shouldHaveNoInventoryWhenCreated();
   shouldCarryAnItemWhenPickedUp();
   shouldLoseAnItemWhenDropped();
-  shouldTakeAllAtALocation();
+
+  // === TASK 3 ===
+  // uncomment this test, and make the tests pass
+  // shouldTakeAllAtALocation();
+
+  // === TASK 4 ===
+  // uncomment this test
+  // shouldDropAllAtALocation();
+
   console.log(__filename, 'all OK');
 }
 
