@@ -52,7 +52,7 @@ function shouldTakeAllAtALocation() {
     let hero = new Hero('adventurer', location);
 
     let item1 = new Item('test1', 'a test item');
-    let item2 = new Item('test1', 'a test item');
+    let item2 = new Item('test2', 'another test item');
 
     location.place(item1);
     location.place(item2);
@@ -84,7 +84,7 @@ function main() {
 
   // === TASK 3 ===
   // uncomment this test, and make the tests pass
-  // shouldTakeAllAtALocation();
+  shouldTakeAllAtALocation();
 
   // === TASK 4 ===
   // uncomment this test
