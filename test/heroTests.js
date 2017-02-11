@@ -84,7 +84,7 @@ function main() {
 
   // === TASK 3 ===
   // uncomment this test, and make the tests pass
-  shouldTakeAllAtALocation();
+  // shouldTakeAllAtALocation();
 
   // === TASK 4 ===
   // uncomment this test
