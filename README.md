@@ -1,6 +1,8 @@
 # adventure
 Adventure game skeleton for LCCM open day workshop
 
+*NB* to run this exercise you will need Node.js (use the latest version, currently 7.5.0) installed on your computer. Download this from https://nodejs.org/en/
+
 When working with software, more often than not we don't start from scratch. We work with code that already exists — either code someone else has written, or code we wrote yesterday, last week, last month. This short workshop presents a number of tasks around a simple text adventure game written in Javascript. 
 
 Work in pairs. You will find it helpful if one of you knows at least a bit of JavaScript, but even if not, providing you have some level of programming experience you should be able to work out what's going on and complete the tasks.
