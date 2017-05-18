@@ -89,5 +89,5 @@ Take a look at the original Colossal Cave Adventure by Crowther and Woods (the W
 * Saving the game
 
 ##TASK 6 (homework — advanced)
-If you are more familiar with JavaScript and coding in general: the game engine in main.js is quite obvious, but not as it stands particularly easy to extend with new commands and capabilities. How might you make it easier to add the functionality you;ve explored in Task 5.
+If you are more familiar with JavaScript and coding in general: the game engine in main.js is quite obvious, but not as it stands particularly easy to extend with new commands and capabilities. How might you make it easier to add the functionality you've explored in Task 5.
 
