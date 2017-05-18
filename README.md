@@ -61,7 +61,6 @@ Now we're going to dive a bit deeper into the code. Take a look at the function 
 We're going to expand the repertoire of actions with the ability to take all and drop all. We're going to do this by writing some tests first, that execute these actions against the code that represents our hero.
 
 The tests in this project live in a folder called test. We can run these tests using the following command (from the adventure folder)
-h
 
 ```
 $ npm test
