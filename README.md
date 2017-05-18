@@ -13,13 +13,13 @@ We'll talk and review between the tasks, and show each other/discuss the solutio
 
 We only have 30 minutes for this open day workshop, so don't worry if you don't get to finish everything! If you want to download the code and play with it some more, it's available on GitHub at https://github.com/davethehat/adventure
 
-The game source is in a folder `adventure`. 
-
-Make sure you are in a terminal and in the source folder. To run the adventure and tests type
+The game source is in a folder `adventure`. In Cloud9 you should see a window named 'bash' in the tabs beneath the editing window, so click in the tab and type
 
 ```
 $ npm start <your name here>
 ```
+(If you're running this at home, open a terminal window, and change directory into the `adventure` directory in the directory into which you downloaded the adventre codebase.)
+
 This will bring you to a prompt:
 ```
 $ npm start David
@@ -61,6 +61,7 @@ Now we're going to dive a bit deeper into the code. Take a look at the function 
 We're going to expand the repertoire of actions with the ability to take all and drop all. We're going to do this by writing some tests first, that execute these actions against the code that represents our hero.
 
 The tests in this project live in a folder called test. We can run these tests using the following command (from the adventure folder)
+h
 
 ```
 $ npm test
