@@ -3,15 +3,19 @@ Adventure game skeleton for LCCM open day workshop
 
 *NB* to run this exercise you will need Node.js (use the latest version, currently 7.5.0) installed on your computer. Download this from https://nodejs.org/en/
 
+At the open day workshop we'll be running this in a cloud-based development environment called Cloud9. 
+
 When working with software, more often than not we don't start from scratch. We work with code that already exists — either code someone else has written, or code we wrote yesterday, last week, last month. This short workshop presents a number of tasks around a simple text adventure game written in Javascript. 
 
 Work in pairs. You will find it helpful if one of you knows at least a bit of JavaScript, but even if not, providing you have some level of programming experience you should be able to work out what's going on and complete the tasks.
 
 We'll talk and review between the tasks, and show each other/discuss the solutions so far.
 
-We only have 30 minutes for this open day workshop, so don't worry if you don't get to finish everything! 
+We only have 30 minutes for this open day workshop, so don't worry if you don't get to finish everything! If you want to download the code and play with it some more, it's available on GitHub at https://github.com/davethehat/adventure
 
-The game source is in a folder adventure. Make sure you are in a terminal and in the source folder. To run the adventure and tests type
+The game source is in a folder `adventure`. 
+
+Make sure you are in a terminal and in the source folder. To run the adventure and tests type
 
 ```
 $ npm start <your name here>
