@@ -31,24 +31,22 @@ main();
 
 // ===============================
 function main() {
-  let heroName = process.argv[2] || 'adventurer';
-
-  let initialLocation = initialiseMap();
-
-  let hero = new Hero(heroName, initialLocation);
+  const heroName = process.argv[2] || 'adventurer';
+  const initialLocation = initialiseMap();
+  const hero = new Hero(heroName, initialLocation);
   
   runGame(hero);
 }
 
 // ===============================
 function initialiseMap() {
-  let clearing = new Location('clearing', 'A clearing in a wood.');
-  let garden = new Location('garden', 'A pretty garden. Birds are singing.');
-  let hut = new Location('dark hut', 'It smells musty in here.');
+  const clearing = new Location('clearing', 'A clearing in a wood.');
+  const garden = new Location('garden', 'A pretty garden. Birds are singing.');
+  const hut = new Location('dark hut', 'It smells musty in here.');
 
-  let sword = new Item('sword', 'A sharp, shining sword.');
-  let candle = new Item('candle', 'An old wax candle.');
-  let eagle = new Item('eagle', 'A proud eagle. It shuffles warily on its perch.');
+  const sword = new Item('sword', 'A sharp, shining sword.');
+  const candle = new Item('candle', 'An old wax candle.');
+  const eagle = new Item('eagle', 'A proud eagle. It shuffles warily on its perch.');
 
   clearing.addExit('east', 'path', garden);
 
@@ -97,24 +95,24 @@ function commandLoop(hero, inputReader) {
 
 // ===============================
 function processResponse(hero, response) {
-  let [verb, object] = response.split(/ +/);
+  let [verb, object] = response.split(/\s+/);
 
-  if (!verb) {
-    console.log('I beg your pardon?');
-    return;
-  }
+  verb = VERBMAPPING[verb] || verb;
 
   if (verb === 'go') {
     verb = object;
     object = null;
   }
 
-  let translatedVerb = VERBMAPPING[verb];
-
-  if (translatedVerb) {
-    verb = translatedVerb;
+  if (verb) {
+    performAction(hero, verb, object);
+  } else {
+    console.log('I beg your pardon?');
   }
+}
 
+// ===============================
+function performAction(hero, verb, object) {
   if (object) {
     processVerbObjectCommand(hero, verb, object);
   } else if (isDirection(verb)) {
@@ -122,44 +120,25 @@ function processResponse(hero, response) {
   } else {
     processVerbCommand(hero, verb);
   }
-
 }
 
 // ===============================
 function processVerbObjectCommand(hero, verb, object) {
-  let location = hero.getLocation();
-
   if (verb === 'take') {
-    let item = location.itemNamed(object);
-    if (item) {
-      hero.take(item);
-      console.log('You picked up ' + textUtil.withArticle(object) + '.');
-    } else {
-      console.log('You can\'t see ' + textUtil.withArticle(object) + '!');
-    }
-    return;
+    doTake(hero, object);
+  } else if (verb === 'drop') {
+    doDrop(hero, object);
+  } else {
+    console.log('I don\'t know how to ' + verb + ' the ' + object + '!');
   }
-
-  if (verb === 'drop') {
-    let item = hero.itemNamed(object);
-    if (item) {
-      hero.drop(item);
-      console.log('You no longer have ' + textUtil.withArticle(object) + '.');
-    } else {
-      console.log('You don\'t have ' + textUtil.withArticle(object) + '!');
-    }
-    return;
-  }
-
-  console.log('I don\'t know how to ' + verb + ' the ' + object + '!');
 }
 
 // ===============================
 function processDirectionCommand(hero, direction) {
-    let moved =  hero.go(direction);
-    if (!moved) {
-      console.log('You can\'t go that way!');
-    }
+  let moved = hero.go(direction);
+  if (!moved) {
+    console.log('You can\'t go that way!');
+  }
 }
 
 // ===============================
@@ -167,28 +146,52 @@ function processVerbCommand(hero, verb) {
   if (verb === 'quit') {
     console.log('Farewell, ' + hero.getName() + '!\n\n');
     process.exit(0);
-  }
-
-  if (verb === 'look') {
+  } else  if (verb === 'look') {
     verbose = true;
-    return;
+  } else  if (verb === 'inventory') {
+    doInventory(hero);
+  } else {
+    console.log('I\'m afraid I don\'t understand how to ' + verb + '!');
   }
+}
 
-  if (verb === 'inventory') {
-    if (hero.numberOfItemsCarried() === 0 ) {
-      console.log('You aren\'t carrying anything!');
-      return;
-    }
+// ===============================
+function doTake(hero, itemName) {
+  const location = hero.getLocation();
+  const item = location.itemNamed(itemName);
 
+  if (itemName === 'eagle') {
+    console.log('The eagle screeches and pecks angrily at your fingers. The\n' +
+                'magnificent bird is not impressed by your overtures.');
+  } else if (item) {
+    hero.take(item);
+    console.log('You picked up ' + textUtil.withArticle(itemName) + '.');
+  } else {
+    console.log('You can\'t see ' + textUtil.withArticle(itemName) + '!');
+  }
+}
+
+// ===============================
+function doDrop(hero, itemName) {
+  const item = hero.itemNamed(itemName);
+  if (item) {
+    hero.drop(item);
+    console.log('You no longer have ' + textUtil.withArticle(itemName) + '.');
+  } else {
+    console.log('You don\'t have ' + textUtil.withArticle(itemName) + '!');
+  }
+}
+
+// ===============================
+function doInventory(hero) {
+  if (hero.numberOfItemsCarried() === 0 ) {
+    console.log('You aren\'t carrying anything!');
+  } else {
     console.log('You are carrying: ');
     hero.withInventory(itemName => {
       console.log('  - ' + textUtil.withArticle(itemName));
     });
-
-    return;
   }
-
-  console.log('I\'m afraid I don\'t understand how to ' + verb + '!');
 }
 
 // ===============================
