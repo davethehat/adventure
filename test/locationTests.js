@@ -1,6 +1,5 @@
 'use strict';
 
-
 const assert = require('assert');
 
 const Location = require('../src/model/location.js');
@@ -12,7 +11,6 @@ function shouldHaveNoItemsWhenCreated() {
   location.withItems( () => itemCount++);
   assert.equal(itemCount, 0);
 }
-
 
 function shouldPlaceAnItem() {
   let location = new Location('test', 'a test location');

@@ -1,6 +1,5 @@
 'use strict';
 
-
 const textUtil = require('../util/textUtil');
 
 class Location {
@@ -20,7 +19,7 @@ class Location {
   }
 
   withItems(fn) {
-    Object.entries(this.items).forEach(([name, item]) => fn(name, item));
+    Object.values(this.items).forEach(fn);
   }
   
   withExits(fn) {
@@ -55,7 +54,5 @@ class Location {
     return exit ? exit.location : null;
   }
 }
-
-
 
 module.exports = Location;

@@ -5,10 +5,10 @@ const VOWELS = 'aeiou';
 
 module.exports = {
   withArticle(s) {
-    if (VOWELS.includes(s[0].toLowerCase())) {
-      return 'an ' + s;
-    }
-    return 'a ' + s;
+    const article = VOWELS.includes(s[0].toLowerCase())
+      ? 'an'
+      : 'a';
+    return `${article} ${s}`;
   },
 
   capitalise(s) {
